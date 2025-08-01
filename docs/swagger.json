@@ -1,0 +1,1406 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Joke App API",
+    "description": "Auto-generated Swagger UI for Joke App",
+    "version": "1.0.0"
+  },
+  "host": "192.168.100.177:8010",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "API",
+      "description": "Endpoints for Flutter app"
+    },
+    {
+      "name": "Types",
+      "description": "Endpoints related to types"
+    },
+    {
+      "name": "Categories",
+      "description": "Endpoints for joke categories"
+    },
+    {
+      "name": "Sub Categories",
+      "description": "Endpoints for joke sub categories"
+    },
+    {
+      "name": "Jokes",
+      "description": "Endpoints for jokes"
+    },
+    {
+      "name": "Apps",
+      "description": "Endpoints for apps"
+    },
+    {
+      "name": "Users",
+      "description": "Endpoints for Admin users"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/apps/": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "categories": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/apps/{id}": {
+      "get": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "categories": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/types/": {
+      "get": {
+        "tags": [
+          "Types"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Types"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "field": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "sample"
+                },
+                "conversation": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "joke": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "joke_image": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "text_answer": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "image_answer": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/types/{id}": {
+      "get": {
+        "tags": [
+          "Types"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Types"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "field": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "sample"
+                },
+                "conversation": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "joke": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "joke_image": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "text_answer": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "image_answer": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Types"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/categories/": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "type_id",
+            "in": "formData",
+            "type": "number",
+            "required": true,
+            "description": "Type id"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category name"
+          },
+          {
+            "name": "color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category color"
+          },
+          {
+            "name": "border_color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category border color"
+          },
+          {
+            "name": "image_file",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Category image"
+          },
+          {
+            "name": "has_subcategory",
+            "in": "formData",
+            "type": "boolean",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "version",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type_id",
+            "in": "formData",
+            "type": "number",
+            "required": true,
+            "description": "Type id"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category name"
+          },
+          {
+            "name": "color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category color"
+          },
+          {
+            "name": "border_color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category border color"
+          },
+          {
+            "name": "image_file",
+            "in": "formData",
+            "type": "file",
+            "required": false,
+            "description": "Category image"
+          },
+          {
+            "name": "cover_image",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category image"
+          },
+          {
+            "name": "has_subcategory",
+            "in": "formData",
+            "type": "boolean",
+            "required": true,
+            "description": ""
+          },
+          {
+            "name": "version",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category version"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cover_image": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/subcategories/": {
+      "get": {
+        "tags": [
+          "Sub Categories"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sub Categories"
+        ],
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "cat_id",
+            "in": "formData",
+            "type": "number",
+            "required": true,
+            "description": "Category id"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category name"
+          },
+          {
+            "name": "color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category color"
+          },
+          {
+            "name": "border_color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "Category border color"
+          },
+          {
+            "name": "image_file",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "Category image"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/subcategories/{id}": {
+      "get": {
+        "tags": [
+          "Sub Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sub Categories"
+        ],
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cat_id",
+            "in": "formData",
+            "type": "number",
+            "required": true,
+            "description": "Category id"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "SubCategory name"
+          },
+          {
+            "name": "color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "SubCategory color"
+          },
+          {
+            "name": "border_color",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "SubCategory border color"
+          },
+          {
+            "name": "cover_image",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "SubCategory image"
+          },
+          {
+            "name": "image_file",
+            "in": "formData",
+            "type": "file",
+            "required": false,
+            "description": "SubCategory image"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cover_image": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sub Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/subcategories/catid/{id}": {
+      "get": {
+        "tags": [
+          "Sub Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/jokes/": {
+      "get": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "cat_id",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "description": "Category Id"
+          },
+          {
+            "name": "subcat_id",
+            "in": "formData",
+            "type": "number",
+            "description": "Sub Category Id"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Joke Content"
+          },
+          {
+            "name": "joke_image",
+            "in": "formData",
+            "type": "file",
+            "description": "Joke Image"
+          },
+          {
+            "name": "speaker_image",
+            "in": "formData",
+            "type": "file",
+            "description": "Speaker Image"
+          },
+          {
+            "name": "receiver_image",
+            "in": "formData",
+            "type": "file",
+            "description": "Receiver Image"
+          },
+          {
+            "name": "image_answer",
+            "in": "formData",
+            "type": "file",
+            "description": "Answer Image"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/jokes/{id}": {
+      "get": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cat_id",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "description": "Category Id"
+          },
+          {
+            "name": "subcat_id",
+            "in": "formData",
+            "type": "number",
+            "description": "Sub Category Id"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Joke Content"
+          },
+          {
+            "name": "joke_image",
+            "in": "formData",
+            "type": "file",
+            "description": "Joke Image"
+          },
+          {
+            "name": "speaker_image",
+            "in": "formData",
+            "type": "file",
+            "description": "Speaker Image"
+          },
+          {
+            "name": "receiver_image",
+            "in": "formData",
+            "type": "file",
+            "description": "Receiver Image"
+          },
+          {
+            "name": "image_answer",
+            "in": "formData",
+            "type": "file",
+            "description": "Answer Image"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/jokes/catid/{id}": {
+      "get": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/jokes/subcatid/{id}": {
+      "get": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "credentials": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/edituser": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/deleteuser/{id}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/categories": {
+      "post": {
+        "tags": [
+          "API"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "app_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "version": {
+                  "type": "string",
+                  "example": "1.0.0"
+                },
+                "last_cat_id": {}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/subcategories": {
+      "post": {
+        "tags": [
+          "API"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cat_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "last_subcat_id": {}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/jokes": {
+      "post": {
+        "tags": [
+          "API"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cat_id": {},
+                "subcat_id": {},
+                "joke_id": {}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
