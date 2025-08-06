@@ -4,7 +4,7 @@ const Joke = {
   getJokes: async (limit = 1000000) => {
     try {
       const query = `SELECT 
-          j.id, j.cat_id, c.type_id, c.name as cat_name, j.subcat_id, IFNULL(s.name, '') as subcat_name, j.content
+          j.id, j.cat_id, c.type_id, c.name as cat_name, j.subcat_id, IFNULL(s.name, '') as subcat_name, j.content, IFNULL(s.color, c.color) as color, IFNULL(s.border_color, c.border_color) as border_color
         FROM
          jokes j 
         LEFT JOIN 
@@ -17,13 +17,13 @@ const Joke = {
         let content = record.content;
         if (typeof content === "string") {
           try {
-            content = JSON.parse(content); // first parse
+            content = JSON.parse(content);
             if (typeof content === "string") {
-              content = JSON.parse(content); // second parse if still string
+              content = JSON.parse(content);
             }
           } catch (e) {
             console.warn("Failed to parse content for joke ID:", record.id, e);
-            content = null; // or keep original content
+            content = null;
           }
         }
         return { ...record, content };
@@ -39,7 +39,7 @@ const Joke = {
       const last_id = joke_id ? joke_id : 0;
       const limit = 500;
       const query = `SELECT 
-                        j.id, c.type_id, j.cat_id, j.subcat_id, j.content
+                        j.id, c.type_id, j.cat_id, j.subcat_id, j.content, c.color, c.border_color
                     FROM
                         jokes j
                     INNER JOIN 
@@ -78,7 +78,7 @@ const Joke = {
       const last_id = joke_id ? joke_id : 0;
       const limit = 500;
       const query = `SELECT 
-                        j.id, c.type_id, j.cat_id, j.subcat_id, j.content 
+                        j.id, c.type_id, j.cat_id, j.subcat_id, j.content, s.color, s.border_color
                     FROM 
                         jokes j
                     INNER JOIN 

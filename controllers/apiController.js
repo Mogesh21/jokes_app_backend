@@ -107,17 +107,16 @@ export const getJokes = async (req, res) => {
   try {
     const { cat_id, subcat_id, joke_id } = req.body;
 
-    if (cat_id === undefined && subcat_id === undefined) {
-      return res.status(200).json({
-        result: 0,
-        resultData: null,
-        message: "Either cat_id or subcat_id is required",
-      });
-    }
+    // if (cat_id === undefined && subcat_id === undefined) {
+    //   return res.status(200).json({
+    //     result: 0,
+    //     resultData: null,
+    //     message: "Either cat_id or subcat_id is required",
+    //   });
+    // }
 
     let result = [];
     if (!isNaN(parseInt(subcat_id))) {
-      console.log(1);
       result = await Joke.getJokeBySubCatId(subcat_id, joke_id);
     } else if (!isNaN(parseInt(cat_id))) {
       result = await Joke.getJokeByCatId(cat_id, joke_id);
