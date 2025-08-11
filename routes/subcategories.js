@@ -11,6 +11,7 @@ import {
   updateSubCategory,
 } from "../controllers/subcategoryController.js";
 import { addSubCategoryValidator, updateSubCategoryValidator } from "../validator/validator.js";
+import Subcategory from "../models/Subcategory.js";
 
 const router = express.Router();
 
@@ -22,11 +23,13 @@ const storage = multer.diskStorage({
     }
     cb(null, dir);
   },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      Date.now() + "" + Math.floor(100 + Math.random() * 900) + path.extname(file.originalname)
-    );
+  filename: async function (req, file, cb) {
+    const id = req.params.id;
+    const [data] = await Subcategory.getSubCategoryById(id);
+    let image_name =
+      Date.now() + "" + Math.floor(100 + Math.random() * 900) + path.extname(file.originalname);
+    if (data) image_name = data.cover_image;
+    cb(null, image_name);
   },
 });
 
@@ -39,7 +42,15 @@ router.get("/", getSubCategories);
 router.get("/:id", getSubcategoryById);
 router.get("/catid/:id", getSubcategoryByCatId);
 router.post("/", subcategory.single("image_file"), addSubCategoryValidator, addSubCategory);
-router.put("/:id", subcategory.single("image_file"), updateSubCategoryValidator, updateSubCategory);
+router.put(
+  "/:id",
+  subcategory.fields([
+    { name: "cover_image", maxCount: 1 },
+    { name: "image_file", maxCount: 1 },
+  ]),
+  updateSubCategoryValidator,
+  updateSubCategory
+);
 router.delete("/:id", deleteSubCategory);
 
 export default router;

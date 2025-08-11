@@ -10,6 +10,7 @@ import {
   updateCategory,
 } from "../controllers/categoriesController.js";
 import { addCategoryValidator, updateCategoryValidator } from "../validator/validator.js";
+import Category from "../models/Category.js";
 
 const router = express.Router();
 
@@ -21,11 +22,13 @@ const storage = multer.diskStorage({
     }
     cb(null, dir);
   },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      Date.now() + "" + Math.floor(100 + Math.random() * 900) + path.extname(file.originalname)
-    );
+  filename: async function (req, file, cb) {
+    const id = req.params.id;
+    const [data] = await Category.getCategoryById(id);
+    let image_name =
+      Date.now() + "" + Math.floor(100 + Math.random() * 900) + path.extname(file.originalname);
+    if (data) image_name = data.cover_image;
+    cb(null, image_name);
   },
 });
 

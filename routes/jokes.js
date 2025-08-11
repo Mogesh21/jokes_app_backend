@@ -12,6 +12,7 @@ import multer from "multer";
 import path from "path";
 import { existsSync, mkdirSync } from "fs";
 import { addJokeValidator, updateJokeValidator } from "../validator/validator.js";
+import Joke from "../models/Joke.js";
 
 const router = express.Router();
 
@@ -23,11 +24,15 @@ const storage = multer.diskStorage({
     }
     cb(null, dir);
   },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      Date.now() + "" + Math.floor(100 + Math.random() * 900) + path.extname(file.originalname)
-    );
+  filename: async function (req, file, cb) {
+    const id = req.params.id;
+    const [data] = await Joke.getJokeById(id);
+    let image_name =
+      Date.now() + "" + Math.floor(100 + Math.random() * 900) + path.extname(file.originalname);
+    if (data && data.content && data.content[file.fieldname]) {
+      image_name = data.content[file.fieldname];
+    }
+    cb(null, image_name);
   },
 });
 
