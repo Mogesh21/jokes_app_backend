@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
 
 const category = multer({
   storage: storage,
-  limits: 5 * 1024 * 1024,
+  limits: { fileSize: 1 * 1024 * 1024 },
 });
 
 router.get("/", getCategories);
@@ -42,5 +42,11 @@ router.post("/", category.single("image_file"), addCategoryValidator, addCategor
 router.put("/:id", category.single("image_file"), updateCategoryValidator, updateCategory);
 router.get("/:id", getCategoryById);
 router.delete("/:id", deleteCategory);
+
+router.use((err, req, res, next) => {
+  res.status(413).json({
+    message: "File size must be less than 1MB",
+  });
+});
 
 export default router;

@@ -51,7 +51,7 @@ export const getCategoryById = async (req, res) => {
   }
 };
 
-export const addCategory = async (req, res) => { 
+export const addCategory = async (req, res) => {
   // #swagger.tags = ['Categories']
   // #swagger.consumes = ['multipart/form-data']
   // #swagger.parameters['type_id'] = { in: 'formData', type: 'number', required: true, description: 'Type id' }
@@ -116,12 +116,12 @@ export const updateCategory = async (req, res) => {
         message: "cover_image is required",
       });
     } else if (!id || !parseInt(id)) {
-      if (req.file) removeFile(filename, "categories");
+      // if (req.file) removeFile(filename, "categories");
       return res.status(400).json({
         message: "id is required",
       });
     } else if (!errors.isEmpty()) {
-      if (req.file) removeFile(filename, "categories");
+      // if (req.file) removeFile(filename, "categories");
       return res.status(400).json({
         message: errors.array()[0].msg,
       });
@@ -130,19 +130,19 @@ export const updateCategory = async (req, res) => {
     const data = req.body;
     const result = await CategoryModel.updateCategory({ ...data, cover_image: filename, id: id });
     if (result === 0) {
-      if (req.file) removeFile(filename, "categories");
+      // if (req.file) removeFile(filename, "categories");
       res.status(404).json({
         message: "Category not updated",
       });
     } else {
-      if (req.file) removeFile(cover_image, "categories");
+      // if (req.file) removeFile(cover_image, "categories");
       res.status(200).json({
         message: "Category updated successfully",
       });
     }
   } catch (error) {
     console.log(error);
-    if (req.file) removeFile(filename, "categories");
+    // if (req.file) removeFile(filename, "categories");
     res.status(500).json({
       message: "Internal Server Error",
     });

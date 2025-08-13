@@ -121,7 +121,7 @@ export const getJokes = async (req, res) => {
     } else if (!isNaN(parseInt(cat_id))) {
       result = await Joke.getJokeByCatId(cat_id, joke_id);
     } else {
-      result = await Joke.getJokes(500);
+      result = await Joke.getJokes(500, joke_id);
     }
     const formattedResult = result.map((joke) => {
       const baseUrl = `${process.env.SERVER}/public/jokes/`;

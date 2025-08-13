@@ -15,7 +15,7 @@ const Category = {
     try {
       const query =
         "SELECT c.id, c.name, c.type_id, c.color, c.border_color, c.cover_image, c.has_subcategory, c.version, t.joke, t.joke_image, t.conversation, t.text_answer, t.image_answer FROM categories c LEFT JOIN types t ON t.id = c.type_id where c.id = ? AND c.deleted_at is NULL";
-      const [result] = await db.query(query, id);
+      const [result] = await db.query(query, [id]);
       return result;
     } catch (err) {
       throw err;

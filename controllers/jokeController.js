@@ -207,7 +207,7 @@ export const addJoke = async (req, res) => {
       content.image_answer = imageAnswer;
     }
 
-    const insertId = await Joke.addJoke({ ...data, content: content });
+    const insertId = await Joke.addJokes([{ ...data, content: content }]);
     res.status(200).json({
       data: {
         insertId,
@@ -220,6 +220,36 @@ export const addJoke = async (req, res) => {
     if (speakerImage) removeFile(speakerImage, "jokes");
     if (receiverImage) removeFile(receiverImage, "jokes");
     if (imageAnswer) removeFile(imageAnswer, "jokes");
+
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const addMultipleJoke = async (req, res) => {
+  // #swagger.tags = ["Jokes"]
+  // #swagger.parameters['cat_id'] = {in: 'formData', required: true, type: 'number', description: 'Category Id' }
+  // #swagger.parameters['subcat_id'] = {in: 'formData', type: 'number', description: 'Sub Category Id' }
+  // #swagger.parameters['content'] = {in: 'formData', required: true, type: 'string', description: 'Joke Content' }
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        message: errors.array()[0].msg,
+      });
+    }
+    const data = req.body;
+
+    const insertId = await Joke.addJokes(data);
+    res.status(200).json({
+      data: {
+        insertId,
+      },
+      message: "Jokes added successfully",
+    });
+  } catch (err) {
+    console.log(err);
 
     res.status(500).json({
       message: "Internal Server Error",
@@ -247,7 +277,7 @@ export const updateJoke = async (req, res) => {
   const speakerImageName = speaker[speaker.length - 1];
   const receiverImageName = receiver[receiver.length - 1];
   const answerImageName = answerImg[answerImg.length - 1];
-  
+
   const jokeImage =
     req.files && req.files["joke_image"] ? req.files["joke_image"][0]?.filename : jokeImageName;
   const speakerImage =
@@ -308,20 +338,20 @@ export const updateJoke = async (req, res) => {
         message: "Joke not found",
       });
     } else {
-      if (oldImage.jokeImage) removeFile(oldImage.jokeImage, "jokes");
-      if (oldImage.speakerImage) removeFile(oldImage.speakerImage, "jokes");
-      if (oldImage.receiverImage) removeFile(oldImage.receiverImage, "jokes");
-      if (oldImage.imageAnswer) removeFile(oldImage.imageAnswer, "jokes");
+      // if (oldImage.jokeImage) removeFile(oldImage.jokeImage, "jokes");
+      // if (oldImage.speakerImage) removeFile(oldImage.speakerImage, "jokes");
+      // if (oldImage.receiverImage) removeFile(oldImage.receiverImage, "jokes");
+      // if (oldImage.imageAnswer) removeFile(oldImage.imageAnswer, "jokes");
       res.status(200).json({
         message: "Joke updated successfully",
       });
     }
   } catch (err) {
     console.log(err);
-    if (req.files && req.files["joke_image"]) removeFile(jokeImage, "jokes");
-    if (req.files && req.files["speaker_image"]) removeFile(speakerImage, "jokes");
-    if (req.files && req.files["receiver_image"]) removeFile(receiverImage, "jokes");
-    if (req.files && req.files["image_answer"]) removeFile(imageAnswer, "jokes");
+    // if (req.files && req.files["joke_image"]) removeFile(jokeImage, "jokes");
+    // if (req.files && req.files["speaker_image"]) removeFile(speakerImage, "jokes");
+    // if (req.files && req.files["receiver_image"]) removeFile(receiverImage, "jokes");
+    // if (req.files && req.files["image_answer"]) removeFile(imageAnswer, "jokes");
 
     res.status(500).json({
       message: "Internal Server Error",

@@ -1160,6 +1160,47 @@
         }
       }
     },
+    "/jokes/multiple": {
+      "post": {
+        "tags": [
+          "Jokes"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "cat_id",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "description": "Category Id"
+          },
+          {
+            "name": "subcat_id",
+            "in": "formData",
+            "type": "number",
+            "description": "Sub Category Id"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Joke Content"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/user/": {
       "get": {
         "tags": [

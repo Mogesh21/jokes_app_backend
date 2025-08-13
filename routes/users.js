@@ -26,7 +26,7 @@ const profileStorage = multer.diskStorage({
 
 const profile = multer({
   storage: profileStorage,
-  fileSize: 1024 * 1024 * 5,
+  fileSize: { fileSize: 1024 * 1024 * 1 },
 });
 
 router.get("/", getUsers);
@@ -38,5 +38,11 @@ router.post("/login", loginUser);
 router.post("/edituser", profile.single("avatar"), updateUser);
 
 router.delete("/deleteuser/:id", deleteUser);
+
+router.use((err, req, res, next) => {
+  res.status(413).json({
+    message: "File size must be less than 1MB",
+  });
+});
 
 export default router;

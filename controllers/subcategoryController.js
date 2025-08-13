@@ -131,12 +131,12 @@ export const updateSubCategory = async (req, res) => {
         message: "cover_image is required",
       });
     } else if (!id || !parseInt(id)) {
-      if (req.file) removeFile(filename, "subcategories");
+      // if (req.file) removeFile(filename, "subcategories");
       return res.status(400).json({
         message: "id is required",
       });
     } else if (!errors.isEmpty()) {
-      if (req.file) removeFile(filename, "subcategories");
+      // if (req.file) removeFile(filename, "subcategories");
       return res.status(400).json({
         message: errors.array()[0].msg,
       });
@@ -148,19 +148,19 @@ export const updateSubCategory = async (req, res) => {
       id: id,
     });
     if (result === 0) {
-      if (req.file) removeFile(filename, "subcategories");
+      // if (req.file) removeFile(filename, "subcategories");
       return res.status(404).json({
         message: "Subcategory not updated",
       });
     } else {
-      if (req.file) removeFile(cover_image, "subcategories");
+      // if (req.file) removeFile(cover_image, "subcategories");
       return res.status(200).json({
         message: "Subcategory updated successfully",
       });
     }
   } catch (err) {
     console.log(err);
-    if (req.file) removeFile(filename, "subcategories");
+    // if (req.file) removeFile(filename, "subcategories");
     res.status(500).json({
       message: "Internal Server Error",
     });

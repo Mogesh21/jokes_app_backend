@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addJoke,
+  addMultipleJoke,
   deleteJoke,
   getJokeById,
   getJokes,
@@ -38,7 +39,7 @@ const storage = multer.diskStorage({
 
 const joke_storage = multer({
   storage: storage,
-  limits: 10 * 1024 * 1024,
+  limits: { fileSize: 1 * 1024 * 1024 },
 });
 
 router.get("/", getJokes);
@@ -56,7 +57,7 @@ router.post(
   addJokeValidator,
   addJoke
 );
-
+router.post("/multiple", addMultipleJoke);
 router.put(
   "/:id",
   joke_storage.fields([
@@ -68,7 +69,12 @@ router.put(
   updateJokeValidator,
   updateJoke
 );
-
 router.delete("/:id", deleteJoke);
+
+router.use((err, req, res, next) => {
+  res.status(413).json({
+    message: "File size must be less than 1MB",
+  });
+});
 
 export default router;

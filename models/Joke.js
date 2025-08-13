@@ -1,7 +1,7 @@
 import db from "../config/db.js";
 
 const Joke = {
-  getJokes: async (limit = 1000000) => {
+  getJokes: async (limit = 1000000, joke_id = 0) => {
     try {
       const query = `SELECT 
           j.id, j.cat_id, c.type_id, c.name as cat_name, j.subcat_id, IFNULL(s.name, '') as subcat_name, j.content, IFNULL(s.color, c.color) as color, IFNULL(s.border_color, c.border_color) as border_color
@@ -11,19 +11,19 @@ const Joke = {
           categories c ON c.id = j.cat_id 
         LEFT JOIN 
           subcategories s ON j.subcat_id = s.id 
-        WHERE j.deleted_at IS NULL AND JSON_VALID(j.content) LIMIT ?`;
-      const [result] = await db.query(query, [limit]);
+        WHERE j.id > ? AND j.deleted_at IS NULL AND JSON_VALID(j.content) LIMIT ?`;
+      const [result] = await db.query(query, [joke_id, limit]);
       const formattedResult = result.map((record) => {
         let content = record.content;
         if (typeof content === "string") {
           try {
-            content = JSON.parse(content);
+            content = JSON.parse(content); // first parse
             if (typeof content === "string") {
-              content = JSON.parse(content);
+              content = JSON.parse(content); // second parse if still string
             }
           } catch (e) {
             console.warn("Failed to parse content for joke ID:", record.id, e);
-            content = null;
+            content = null; // or keep original content
           }
         }
         return { ...record, content };
@@ -136,10 +136,22 @@ const Joke = {
     }
   },
 
-  addJoke: async ({ cat_id, subcat_id, content }) => {
+  addJokes: async (data) => {
     try {
-      const query = "INSERT INTO jokes (cat_id, subcat_id, content) VALUES (?, ?, ?)";
-      const [result] = await db.query(query, [cat_id, subcat_id, JSON.stringify(content)]);
+      let query = "INSERT INTO jokes (cat_id, subcat_id, content) VALUES";
+      const values = [];
+      const params = [];
+      data.map((joke) => {
+        values.push("(?, ?, ?)");
+        const content =
+          typeof joke.content === "string" ? joke.content : JSON.stringify(joke.content);
+        params.push(joke.cat_id);
+        params.push(joke.subcat_id);
+        params.push(content);
+      });
+      const placeHolder = values.join(", ");
+      query += placeHolder;
+      const [result] = await db.query(query, params);
       return result.insertId;
     } catch (err) {
       throw err;
