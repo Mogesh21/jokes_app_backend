@@ -39,9 +39,11 @@ const Joke = {
       const last_id = joke_id ? joke_id : 0;
       const limit = 500;
       const query = `SELECT 
-                        j.id, c.type_id, j.cat_id, j.subcat_id, j.content, c.color, c.border_color
+                        j.id, c.type_id, j.cat_id, c.name as cat_name, j.subcat_id, IFNULL(s.name, '') as subcat_name, j.content, c.color, c.border_color
                     FROM
                         jokes j
+                    LEFT JOIN 
+                        subcategories s ON j.subcat_id = s.id
                     INNER JOIN 
                         categories c ON c.id = j.cat_id 
                     WHERE 
@@ -78,7 +80,7 @@ const Joke = {
       const last_id = joke_id ? joke_id : 0;
       const limit = 500;
       const query = `SELECT 
-                        j.id, c.type_id, j.cat_id, j.subcat_id, j.content, s.color, s.border_color
+                        j.id, c.type_id, j.cat_id, c.name as cat_name, j.subcat_id, IFNULL(s.name, '') as subcat_name, j.content, s.color, s.border_color
                     FROM 
                         jokes j
                     INNER JOIN 
