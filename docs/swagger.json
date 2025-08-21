@@ -1442,6 +1442,49 @@
           }
         }
       }
+    },
+    "/development/update-images": {
+      "post": {
+        "tags": [
+          "Development"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "speaker_image",
+            "in": "formData",
+            "type": "file",
+            "required": true
+          },
+          {
+            "name": "receiver_image",
+            "in": "formData",
+            "type": "file",
+            "required": true
+          },
+          {
+            "name": "subcat_id",
+            "in": "formData",
+            "type": "number",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {}
+      }
     }
   }
 }

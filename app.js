@@ -8,6 +8,7 @@ import subcategoryRoutes from "./routes/subcategories.js";
 import jokeRoutes from "./routes/jokes.js";
 import apiRoutes from "./routes/apis.js";
 import userRoutes from "./routes/users.js";
+import developmentRoutes from "./routes/development.js";
 import { readFileSync } from "fs";
 import swaggerUi from "swagger-ui-express";
 const swaggerFile = JSON.parse(
@@ -52,6 +53,7 @@ app.use("/jokes", jokeRoutes);
 app.use("/user", userRoutes);
 
 app.use("/api", apiRoutes);
+app.use("/development", developmentRoutes);
 
 app.use((req, res) => {
   res.redirect("/docs");

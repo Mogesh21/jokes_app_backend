@@ -311,7 +311,7 @@ export const updateJoke = async (req, res) => {
       oldImage.jokeImage = jokeImageName;
       content.joke_image = jokeImage;
     } else {
-      content.speaker_image = speakerImageName;
+      content.joke_image = jokeImageName;
     }
     if (req.files && req.files["speaker_image"]) {
       oldImage.speakerImage = speakerImageName;
